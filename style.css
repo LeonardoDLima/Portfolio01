@@ -1,0 +1,640 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0a0a0a;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+.scroll-container {
+  height: 600vh; /* Altura total para permitir scroll */
+  position: relative;
+}
+
+.viewport {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  perspective: 1000px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 70%);
+}
+
+.viewport::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(10, 10, 10, 0.2) 30%, rgba(10, 10, 10, 0.6) 60%, rgba(10, 10, 10, 0.9) 80%, #0a0a0a 100%);
+  z-index: 1001;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.hero-text-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  pointer-events: none;
+  mask: linear-gradient(90deg, black 0%, black 70%, transparent 100%);
+  -webkit-mask: linear-gradient(90deg, black 0%, black 70%, transparent 100%);
+  transition: mask 0.1s ease-out, -webkit-mask 0.1s ease-out;
+}
+
+.viewport.show-shadow::after {
+  opacity: 1;
+}
+
+.content-section {
+  position: absolute;
+  width: 80%;
+  max-width: 1200px;
+  height: 80vh;
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+  border-radius:30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  
+}
+
+.section-1 {
+  background: none;
+}
+
+.section-2 {
+  background: none;
+}
+
+.section-3 {
+  background: none;
+}
+
+.section-4 {
+  background: none;
+}
+
+.section-5 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #fff, #f0f0f0);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 600px;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.tech-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tech-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1);
+}
+
+.scroll-indicator {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  z-index: 1000;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-indicator.hidden {
+  opacity: 0;
+}
+
+.scroll-arrow {
+  animation: bounce 2s infinite;
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+/* CORREÇÃO: @keyframes bounce corrigido */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+  40% {
+      transform: translateY(-10px);
+      opacity: 0.8;
+  }
+  60% {
+      transform: translateY(-5px);
+      opacity: 0.9;
+  }
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #4facfe, #43e97b);
+  z-index: 1001;
+  transition: width 0.1s ease;
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}
+
+/* Barra lateral de navegação */
+.sidebar-nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 100vh;
+  transform: translateY(100vh) translateZ(-300px) rotateX(-30deg);
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(26, 26, 46, 0.8) 100%);
+  backdrop-filter: blur(15px);
+  padding: 40px 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 2px 0 30px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: bottom center;
+}
+
+.sidebar-nav.visible {
+  opacity: 1;
+  transform: translateY(0) translateZ(0px) rotateX(0deg);
+}
+
+/* Ajuste do conteúdo principal para não sobrepor */
+.viewport {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  perspective: 1000px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 70%);
+  transition: margin-left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.viewport.with-sidebar {
+  margin-left: 200px;
+  width: calc(100vw - 200px);
+}
+
+.hero-text-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  pointer-events: none;
+  mask: linear-gradient(90deg, black 0%, black 70%, transparent 100%);
+  -webkit-mask: linear-gradient(90deg, black 0%, black 70%, transparent 100%);
+  transition: margin-left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), mask 0.1s ease-out, -webkit-mask 0.1s ease-out;
+}
+
+.hero-text-container.with-sidebar {
+  margin-left: 200px;
+  width: calc(100vw - 200px);
+}
+
+.nav-link {
+  display: block;
+  padding: 15px 25px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  width: 140px;
+  transform: translateY(30px) scale(0.8);
+  opacity: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-nav.visible .nav-link {
+  transform: translateY(0px) scale(1);
+  opacity: 1;
+}
+
+.sidebar-nav.visible .nav-link:nth-child(1) { transition-delay: 0.2s; }
+.sidebar-nav.visible .nav-link:nth-child(2) { transition-delay: 0.3s; }
+.sidebar-nav.visible .nav-link:nth-child(3) { transition-delay: 0.4s; }
+.sidebar-nav.visible .nav-link:nth-child(4) { transition-delay: 0.5s; }
+.sidebar-nav.visible .nav-link:nth-child(5) { transition-delay: 0.6s; }
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+  background: rgba(102, 126, 234, 0.3);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+  border-color: rgba(102, 126, 234, 0.5);
+}
+
+.nav-link:hover::before {
+  left: 100%;
+}
+
+.nav-link.active {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+  border-color: #667eea;
+}
+
+/* Ajuste da barra de progresso */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #4facfe, #43e97b);
+  z-index: 1003;
+  transition: width 0.1s ease, margin-left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}
+
+.progress-bar.with-sidebar {
+  margin-left: 200px;
+  width: calc(var(--progress, 0%) * (100vw - 200px) / 100vw);
+}
+
+/* Efeitos de partículas */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: float 6s infinite linear;
+}
+
+@keyframes float {
+  0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 1;
+  }
+  100% {
+      transform: translateY(-100px) rotate(360deg);
+      opacity: 0;
+  }
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8rem;
+  font-weight: 900;
+  pointer-events: none;
+  white-space: nowrap;
+  background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 9s ease-in-out infinite;
+  text-shadow: 0 0 50px rgba(102, 126, 234, 0.5);
+  letter-spacing: 0.1em;
+  transition: transform 0.1s ease-out;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+}
+
+/* Área de visualização do carrossel */
+.portfolio-banner {
+width: 100%;
+height: 55vh;
+text-align: center;
+overflow: hidden;
+position: relative;
+}
+.Skills{
+  width: 200px;
+  height: 125px;
+  background-color: red;
+}
+
+/* Configurações do carrossel 3D */
+.portfolio-banner .portfolio-slider {
+position: absolute;
+top: 20%;
+width: 200px;
+height: 125px;
+left: calc(50% - 100px);
+transform-style: preserve-3d; /* Ativa o efeito 3D */
+transform: perspective(1000px) rotateX(-9deg); /* Perspectiva e inclinação 3D */
+transition: 1s; /* Animação suave ao girar */
+}
+
+/* Cada item (imagem) do carrossel */
+.portfolio-banner .portfolio-slider .item {
+position: absolute;
+inset: 0 0 0 0; /* Ocupa 100% da área */
+transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(180px); /* Distribui os itens circularmente no espaço 3D */
+transform-style: preserve-3d; /* Mantém a profundidade do item */
+border-radius: 1rem;
+}
+.portfolio-banner .portfolio-slider .item:hover{
+box-shadow: var(--main-color) 0px 0px 10px 0px;
+}
+
+/* Faces do carrossel (frente e verso) */
+.portfolio-banner .portfolio-slider .front,
+.portfolio-banner .portfolio-slider .back {
+position: absolute;
+width: 100%;
+height: 100%;
+backface-visibility: hidden; /* Esconde o verso ao olhar de frente */
+border-radius: 1rem;
+overflow: hidden;
+box-shadow: none;
+}
+
+/* Imagens do carrossel */
+.portfolio-banner .portfolio-slider .front img {
+width: 100%;
+height: 100%;
+object-fit: cover; /* Imagem cobre toda a área */
+transition: transform 0.5s ease;
+cursor: pointer;
+}
+
+/* Zoom na imagem ao passar o mouse */
+.portfolio-banner .portfolio-slider .front:hover img {
+transform: scale(1.1);
+}
+
+/* Verso da imagem rotacionado */
+.portfolio-banner .portfolio-slider .back {
+transform: rotateY(180deg);
+background-color: var(--bg-color);
+}
+
+/* Centraliza botões de navegação do carrossel */
+.bataoFoto {
+text-align: center;
+}
+
+/* Estilo dos botões de navegação e voltar */
+.btnAnteFt, .btnProxFt, .btnVolt {
+display: inline-block;
+padding: 1rem 2.8rem;
+background: var(--main-color);
+border-radius: 4rem;
+box-shadow: none;
+font-size: 1.6rem;
+color: var(--second-bg-color);
+letter-spacing: .1rem;
+font-weight: 600;
+transition: .5s ease;
+}
+
+/* Hover dos botões de navegação */
+.btnProxFt:hover,
+.btnAnteFt:hover,
+.btnVolt:hover {
+box-shadow:  0 0 1rem var(--main-color);
+}
+
+/* Estilo das imagens dentro do carrossel */
+.portfolio-slider img {
+box-shadow:  0 0 1rem var(--main-color);
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+/* Efeito hover nas imagens do carrossel */
+.portfolio-slider:hover img {
+transform: scale(1.1);
+cursor: pointer;
+}
+/* Animação personalizada: altera a cor do botão */
+.btnAnteFt.animacao {
+color: green; /* Cor verde quando a classe "animacao" é aplicada */
+}
+
+/* Camada sobreposta nas imagens do carrossel */
+.portfolio-slider .portfolio-layer {
+position: absolute; /* Sobrepõe a imagem */
+bottom: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(rgba(0, 0, 0, .1), var(--main-color)); /* Degradê transparente para verde */
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column; /* Alinha os elementos verticalmente */
+text-align: center;
+padding: 0 4rem;
+transform: translateY(100%); /* Começa escondida */
+transition: .5s ease;
+}
+
+/* Mostra a camada sobreposta ao passar o mouse */
+.portfolio-slider:hover .portfolio-layer {
+transform: translateY(0); /* Move para cima e aparece */
+}
+
+/* Título dentro da camada */
+.portfolio-layer h4 {
+font-size: 3rem;
+}
+
+/* Texto dentro da camada */
+.portfolio-layer p {
+font-size: 1.6rem;
+margin: .3rem 0 1rem;
+}
+
+/* Botão (ícone) dentro da camada */
+.portfolio-layer a {
+display: inline-flex;
+justify-content: center;
+align-items: center;
+width: 5rem;
+height: 5rem;
+background: var(--text-color);
+border-radius: 50%;
+}
+
+/* Ícone dentro do botão da camada */
+.portfolio-layer a i {
+font-size: 2rem;
+color: var(--second-bg-color);
+}
+
+/* Responsividade melhorada */
+@media (max-width: 768px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  p { font-size: 1rem; }
+  .hero-text { font-size: 4rem; }
+  .content-section {
+      width: 95%;
+      height: 70vh;
+      padding: 20px;
+  }
+  .tech-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+  }
+  .sidebar-nav {
+      width: 150px;
+  }
+  .viewport.with-sidebar {
+      margin-left: 150px;
+      width: calc(100vw - 150px);
+  }
+  .hero-text-container.with-sidebar {
+      margin-left: 150px;
+      width: calc(100vw - 150px);
+  }
+  .progress-bar.with-sidebar {
+      margin-left: 150px;
+  }
+  .nav-link {
+      padding: 12px 15px;
+      font-size: 0.9rem;
+      width: 110px;
+  }
+  .portfolio-banner .portfolio-slider {
+    width: 100px;
+    height: 90px;
+    }
+    
+}
+
+@media (max-width: 480px) {
+  .hero-text { font-size: 3rem; }
+  .sidebar-nav {
+      width: 120px;
+      padding: 30px 15px;
+  }
+  .viewport.with-sidebar {
+      margin-left: 120px;
+      width: calc(100vw - 120px);
+  }
+  .hero-text-container.with-sidebar {
+      margin-left: 120px;
+      width: calc(100vw - 120px);
+  }
+  .progress-bar.with-sidebar {
+      margin-left: 120px;
+  }
+  .nav-link {
+      padding: 10px 12px;
+      font-size: 0.8rem;
+      width: 90px;
+  }
+  .portfolio-banner .portfolio-slider {
+    width: 100px;
+    height: 90px;
+    }
+    
+}

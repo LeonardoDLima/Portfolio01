@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site 3D Scroll Effect</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="hero-text-container" id="heroContainer">
+        <div class="hero-text" id="heroText">I am Leonardo!</div>
+    </div>
+    
+    <!-- Barra lateral de navegação -->
+    <div class="sidebar-nav" id="sidebarNav">
+        <a href="#exemplo1" class="nav-link" target="_blank">Start</a>
+        <a href="#exemplo2" class="nav-link" target="_blank">Skills</a>
+        <a href="#exemplo3" class="nav-link" target="_blank">About me</a>
+        <a href="#exemplo4" class="nav-link" target="_blank">Projects</a>
+        <a href="#exemplo5" class="nav-link" target="_blank">Contact</a>
+    </div>
+    
+    <div class="particles" id="particles"></div>
+    
+    <div class="scroll-container">
+        <div class="viewport">
+            <div class="content-section section-1" data-section="0">
+                <h1>Welcome to my Portfólio.</h1>
+                <p>I am a FullStack Software Engineer.</p>
+            </div>
+            
+            <div class="content-section section-2" data-section="1">
+                <h2>Skills</h2>
+                <h3>Programming Languages</h3>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h3>HTML5</h3>
+                        <p>Semantic structure.</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>CSS3</h3>
+                        <p>Fluid animations.</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>JavaScript</h3>
+                        <p>Dynamic interactivity.</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>Ruby</h3>
+                        <p>full-stack framework</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section section-3" data-section="2">
+                <h2>About Me!</h2>
+                <p>A dedicated and hard-working person, always looking to improve my skills to be a good professional, quick to learn new skills and very focused, I am very sociable and spare no effort to achieve my goals.</p>
+            </div>
+            
+           <!-- <div class="content-section section-4" data-section="3">
+                <h2>Most recent projects!</h2>
+                <p>Renderização eficiente com 60fps constantes, garantindo suavidade mesmo em dispositivos com recursos limitados.</p>
+            </div>-->
+
+            <!-- Seção de portfólio -->
+    
+    <section class=" content-section section-4" data-section="3" id="portfolio">
+        <h4 class="cabecario">Latest <span>Projects</span></h4>
+        <!-- Carrossel 3D de projetos -->
+        <div class="portfolio-banner">
+            <div class="portfolio-slider" style="--quantity: 4">
+                <!-- Item 1 -->
+                <div class="item" style="--position: 1">
+                    <div class="front">
+                        <a href="#"><div class="Skills"><i class="bi bi-filetype-html"></i></div></a></a>
+                    </div>
+                    <div class="back"></div> <!-- Verso preto -->
+                </div>
+                <!-- Item 2 -->
+                <div class="item" style="--position: 2">
+                    <div class="front">
+                        <a href="#"><div class="Skills"><i class="bi bi-filetype-html"></i></div></a>
+                    </div>
+                    <div class="back"></div>
+                </div>
+                <!-- Item 3 -->
+                <div class="item" style="--position: 3">
+                    <div class="front">
+                        <a href="projeto3.html"><div class="Skills"><i class="bi bi-filetype-html"></i></div></a></a>
+                    </div>
+                    <div class="back"></div>
+                </div>
+                <!-- Item 4 -->
+                <div class="item" style="--position: 4">
+                    <div class="front">
+                        <a href="projeto4.html"><div class="Skills"><i class="bi bi-filetype-html"></i></div></a></a>
+                    </div>
+                    <div class="back"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Instrução de navegação -->
+        <br>
+        <h3 class="txt-navegacao">
+            Click nos botões para navegar ou utilize as teclas A e D.
+        </h3>
+        <!-- Botões de navegação do carrossel -->
+        <div class="bataoFoto">
+            <button class="btnAnteFt" id="fotoAnterior"><i class="bi bi-arrow-left-circle-fill"></i> Anterior</button>
+            <button class="btnProxFt" id="proximaFoto">Próximo <i class="bi bi-arrow-right-circle-fill"></i></button>
+        </div>
+    </section>
+    
+            
+            <div class="content-section section-5" data-section="4">
+                <h2>Contato.</h2>
+                <p>Cada scroll revela uma nova dimensão, criando uma narrativa visual que mantém o usuário envolvido do início ao fim.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="scroll-indicator" id="scrollIndicator">
+        <div>Role para explorar</div>
+        <div class="scroll-arrow">↓</div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
