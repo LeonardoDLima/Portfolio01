@@ -606,6 +606,7 @@ color: var(--second-bg-color);
   .portfolio-banner .portfolio-slider {
     width: 100px;
     height: 90px;
+    left: calc(50% - 50px);
     }
     
 }
@@ -636,5 +637,14 @@ color: var(--second-bg-color);
     width: 100px;
     height: 90px;
     }
-    
+  #sidebarNav{
+    display: none;
+  }
+  .viewport.with-sidebar{
+    margin-left: 0px;
+    width: 100%;
+  }
+  .portfolio-banner .portfolio-slider{
+    left: calc(50% - 50px);
+  }
 }
