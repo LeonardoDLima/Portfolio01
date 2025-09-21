@@ -15,23 +15,23 @@
     
     <!-- Barra lateral de navegação -->
     <div class="sidebar-nav" id="sidebarNav">
-        <a href="#exemplo1" class="nav-link" target="_blank">Start</a>
-        <a href="#exemplo2" class="nav-link" target="_blank">Skills</a>
-        <a href="#exemplo3" class="nav-link" target="_blank">About me</a>
-        <a href="#exemplo4" class="nav-link" target="_blank">Projects</a>
-        <a href="#exemplo5" class="nav-link" target="_blank">Contact</a>
+        <a href="#Start" class="nav-link">Start</a>
+        <a href="#Skills" class="nav-link">Skills</a>
+        <a href="#About" class="nav-link">About me</a>
+        <a href="#Projects" class="nav-link">Projects</a>
+        <a href="#Contact" class="nav-link">Contact</a>
     </div>
     
     <div class="particles" id="particles"></div>
     
     <div class="scroll-container">
         <div class="viewport">
-            <div class="content-section section-1" data-section="0">
+            <div class="content-section section-1" data-section="0" id="Start">
                 <h1>Welcome to my Portfólio.</h1>
                 <p>I am a FullStack Software Engineer.</p>
             </div>
             
-            <div class="content-section section-2" data-section="1">
+            <div class="content-section section-2 active" data-section="1" id="Skills">
                 <h2>Skills</h2>
                 <h3>Programming Languages</h3>
                 <div class="tech-grid">
@@ -54,7 +54,7 @@
                 </div>
             </div>
             
-            <div class="content-section section-3" data-section="2">
+            <div class="content-section section-3" data-section="2" id="About">
                 <h2>About Me!</h2>
                 <p>A dedicated and hard-working person, always looking to improve my skills to be a good professional, quick to learn new skills and very focused, I am very sociable and spare no effort to achieve my goals.</p>
             </div>
@@ -66,7 +66,7 @@
 
             <!-- Seção de portfólio -->
     
-    <section class=" content-section section-4" data-section="3" id="portfolio">
+    <section class=" content-section section-4" data-section="3" id="Projects">
         <h4 class="cabecario">Latest <span>Projects</span></h4>
         <!-- Carrossel 3D de projetos -->
         <div class="portfolio-banner">
@@ -112,11 +112,20 @@
             <button class="btnProxFt" id="proximaFoto">Próximo <i class="bi bi-arrow-right-circle-fill"></i></button>
         </div>
     </section>
-    
-            
-            <div class="content-section section-5" data-section="4">
-                <h2>Contato.</h2>
-                <p>Cada scroll revela uma nova dimensão, criando uma narrativa visual que mantém o usuário envolvido do início ao fim.</p>
+            <div class="content-section section-5" data-section="4" id="Contact">
+                <h2>Contact.</h2>
+                    <div class="input-box">
+                        <input type="text" placeholder="You name" name="nome" required>
+                        <input type="email" placeholder="You E-mail" name="email" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="tel" placeholder="Phone" maxlength="15" name="telefone" onkeyup="identificadorTelefone(event)">
+                        <input type="text" placeholder="E-mail about" name="assunto" required>
+                    </div>
+                    <textarea name="mensagem" cols="47" rows="10" placeholder="You Mensager" required></textarea>
+                    <!-- Botão para enviar o formulário -->
+                    <input type="submit" value="Send mensager" class="btn"></input>
+                </form>
             </div>
         </div>
     </div>
