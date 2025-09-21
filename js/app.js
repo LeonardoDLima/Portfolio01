@@ -250,3 +250,74 @@ const btn1 = document.querySelector("#fotoAnterior");
 btn1.click();
 }
 });
+
+/*========================== animacao da pagina botao navegacao ==============================*/
+document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                // Remove ativo de todos
+                navLinks.forEach(l => l.classList.remove('active'));
+                // Adiciona ativo no clicado
+                this.classList.add('active');
+                
+                // Calcula posição CORRETA para seu sistema 3D
+                const sectionIndex = Array.from(document.querySelectorAll('.content-section')).indexOf(targetElement);
+                let scrollPercent;
+                
+                // Posições específicas para cada seção
+                switch(sectionIndex) {
+                    case 0: scrollPercent = 0.35; break;  // Start
+                    case 1: scrollPercent = 0.49; break;  // Skills  
+                    case 2: scrollPercent = 0.65; break;  // About
+                    case 3: scrollPercent = 0.80; break;  // Projects
+                    case 4: scrollPercent = 0.93; break;  // Contact
+                    default: scrollPercent = 0.35;
+                }
+                
+                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const targetScroll = scrollPercent * scrollHeight;
+                
+                // Scroll suave
+                // ANIMAÇÃO SUAVE CUSTOMIZADA:
+                smoothScrollTo(targetScroll);
+
+                function smoothScrollTo(targetPosition) {
+                    const startPosition = window.pageYOffset;
+                    const distance = targetPosition - startPosition;
+                    const duration = 1500; // 1.5 segundos - mais suave
+                    let startTime = null;
+                    
+                    // Função de easing suave (ease-in-out-cubic)
+                    function easeInOutCubic(t) {
+                        return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+                    }
+                    
+                    function animation(currentTime) {
+                        if (startTime === null) startTime = currentTime;
+                        const timeElapsed = currentTime - startTime;
+                        const progress = Math.min(timeElapsed / duration, 1);
+                        
+                        const easedProgress = easeInOutCubic(progress);
+                        const currentPosition = startPosition + (distance * easedProgress);
+                        
+                        window.scrollTo(0, currentPosition);
+                        
+                        if (progress < 1) {
+                            requestAnimationFrame(animation);
+                        }
+                    }
+                    
+                    requestAnimationFrame(animation);
+                };
+            }
+        });
+    });
+});
