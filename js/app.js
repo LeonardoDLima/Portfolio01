@@ -129,70 +129,77 @@ class ScrollEffect3D {
   }
   
   hideAllSections() {
-      this.sections.forEach(section => {
-          section.style.opacity = 0;
-          section.style.transform = `
-              translate(-50%, -50%) 
-              translateZ(-1000px) 
-              scale(0.1) 
-              rotateX(60deg)
-          `;
-      });
-  }
+    this.sections.forEach(section => {
+        section.classList.remove('visible'); // Remove visibilidade
+        section.style.opacity = 0;
+        section.style.transform = `
+            translate(-50%, -50%) 
+            translateZ(-1000px) 
+            scale(0.1) 
+            rotateX(60deg)
+        `;
+    });
+}
   
   updateSections(offset = 0) {
-      this.sections.forEach((section, index) => {
-          let scale, translateZ, rotateX, opacity;
-          
-          if (index === this.currentSection) {
-              if (offset < 0.3) {
-                  const progress = offset / 0.3;
-                  scale = 0.1 + (0.9 * progress);
-                  translateZ = -800 + (800 * progress);
-                  rotateX = 45 - (45 * progress);
-                  opacity = progress;
-              } else if (offset >= 0.3 && offset <= 0.6) {
-                  scale = 1;
-                  translateZ = 0;
-                  rotateX = 0;
-                  opacity = 1;
-              } else {
-                  const progress = (offset - 0.6) / 0.4;
-                  scale = 1 + (2 * progress);
-                  translateZ = 0 + (500 * progress);
-                  rotateX = 0 - (30 * progress);
-                  opacity = 1 - progress;
-              }
-          } else if (index === this.currentSection + 1) {
-              scale = 0.1;
-              translateZ = -800;
-              rotateX = 45;
-              opacity = 0;
-          } else if (index < this.currentSection) {
-              scale = 3;
-              translateZ = 800;
-              rotateX = -30;
-              opacity = 0;
-          } else {
-              scale = 0.1;
-              translateZ = -1000;
-              rotateX = 60;
-              opacity = 0;
-          }
-          
-          const transition = this.isScrolling ? 'none' : 'all 0.3s ease-out';
-          
-          section.style.transition = transition;
-          section.style.transform = `
-              translate(-50%, -50%) 
-              translateZ(${translateZ}px) 
-              scale(${scale}) 
-              rotateX(${rotateX}deg)
-          `;
-          section.style.opacity = opacity;
-          section.style.zIndex = this.totalSections - Math.abs(index - this.currentSection);
-      });
-  }
+    this.sections.forEach((section, index) => {
+        let scale, translateZ, rotateX, opacity;
+        
+        // Remove a classe visible de todas as seções
+        section.classList.remove('visible');
+        
+        if (index === this.currentSection) {
+            // Adiciona a classe visible apenas para a seção atual
+            section.classList.add('visible');
+            
+            if (offset < 0.3) {
+                const progress = offset / 0.3;
+                scale = 0.1 + (0.9 * progress);
+                translateZ = -800 + (800 * progress);
+                rotateX = 45 - (45 * progress);
+                opacity = progress;
+            } else if (offset >= 0.3 && offset <= 0.6) {
+                scale = 1;
+                translateZ = 0;
+                rotateX = 0;
+                opacity = 1;
+            } else {
+                const progress = (offset - 0.6) / 0.4;
+                scale = 1 + (2 * progress);
+                translateZ = 0 + (500 * progress);
+                rotateX = 0 - (30 * progress);
+                opacity = 1 - progress;
+            }
+        } else if (index === this.currentSection + 1) {
+            scale = 0.1;
+            translateZ = -800;
+            rotateX = 45;
+            opacity = 0;
+        } else if (index < this.currentSection) {
+            scale = 3;
+            translateZ = 800;
+            rotateX = -30;
+            opacity = 0;
+        } else {
+            scale = 0.1;
+            translateZ = -1000;
+            rotateX = 60;
+            opacity = 0;
+        }
+        
+        const transition = this.isScrolling ? 'none' : 'all 0.3s ease-out';
+        
+        section.style.transition = transition;
+        section.style.transform = `
+            translate(-50%, -50%) 
+            translateZ(${translateZ}px) 
+            scale(${scale}) 
+            rotateX(${rotateX}deg)
+        `;
+        section.style.opacity = opacity;
+        section.style.zIndex = this.totalSections - Math.abs(index - this.currentSection);
+    });
+}
   
   createParticles() {
       const particlesContainer = document.getElementById('particles');
@@ -320,4 +327,86 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+});/*========================= Mascara telefone ==================================*/
+const identificadorTelefone = (event) => {
+    let input = event.target
+    input.value = mascaraTelefone(input.value)
+  }
+  
+  const mascaraTelefone = (value) => {
+    if (!value) return ""
+    value = value
+    .replace(/\D/g,'')        // (\D) localiza tudo que não é numero e (g,'') para ser global e substituir por vazil
+    .replace(/(\d{2})(\d)/,"($1) $2") 
+    .replace(/(\d)(\d{4})$/,"$1-$2")
+    return value
+  }
+
+  /*======================== envio ===================================*/
+  document.getElementById('form-Contact').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const nome = form.nome.value.trim();
+    const email = form.email.value.trim();
+    const telefone = form.telefone.value.trim();
+    const assunto = form.assunto.value.trim();
+    const mensagem = form.mensagem.value.trim();
+
+    const status = document.getElementById('mensagem-status');
+    const loader = document.getElementById('loader');
+
+    if (nome && email && assunto && mensagem) {
+        // Mostrar loader
+        loader.style.display = 'block';
+        status.style.opacity = 0;
+
+        // Simulando envio (2 segundos)
+        setTimeout(() => {
+            // Ocultar loader
+            loader.style.display = 'none';
+
+            // Exibir mensagem de sucesso com fade-in
+            status.innerText = 'Mensagem enviada com sucesso!';
+            status.style.color = 'green';
+            status.classList.add('fade');
+
+            // Salvar no localStorage
+            salvarMensagemLocal(nome, email, telefone, assunto, mensagem);
+
+            // Limpar formulário
+            form.reset();
+
+            // Ocultar mensagem após 3 segundos (fade-out)
+            setTimeout(() => {
+                status.classList.remove('fade');
+            }, 3000);
+
+        }, 2000);
+    } else {
+        status.innerText = 'Por favor, preencha todos os campos obrigatórios.';
+        status.style.color = 'red';
+        status.classList.add('fade');
+
+        setTimeout(() => {
+            status.classList.remove('fade');
+        }, 3000);
+    }
 });
+
+// Função para salvar a mensagem no localStorage
+function salvarMensagemLocal(nome, email, telefone, assunto, mensagem) {
+    const mensagensSalvas = JSON.parse(localStorage.getItem('mensagens')) || [];
+
+    const novaMensagem = {
+        nome: nome,
+        email: email,
+        telefone: telefone,
+        assunto: assunto,
+        mensagem: mensagem,
+        data: new Date().toLocaleString()
+    };
+
+    mensagensSalvas.push(novaMensagem);
+    localStorage.setItem('mensagens', JSON.stringify(mensagensSalvas));
+}

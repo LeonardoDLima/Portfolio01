@@ -74,28 +74,36 @@
                 <!-- Item 1 -->
                 <div class="item" style="--position: 1">
                     <div class="front">
-                        <a href="#"><div class="Skills"><i class="bi bi-filetype-html"></i></div></a></a>
+                        <a href="https://leonardodlima.github.io/Portfolio/" target="_blank">
+                            <div class="Skills"><i class="bi bi-filetype-html"></i></div>
+                        </a>
                     </div>
                     <div class="back"></div> <!-- Verso preto -->
                 </div>
                 <!-- Item 2 -->
                 <div class="item" style="--position: 2">
                     <div class="front">
-                        <a href="#"><div class="Skills"><i class="bi bi-filetype-html"></i></div></a>
+                        <a href="https://leonardodlima.github.io/Portfolio/" target="_blank">
+                            <div class="Skills"><i class="bi bi-filetype-html"></i></div>
+                        </a>
                     </div>
                     <div class="back"></div>
                 </div>
                 <!-- Item 3 -->
                 <div class="item" style="--position: 3">
                     <div class="front">
-                        <a href="projeto3.html"><div class="Skills"><i class="bi bi-filetype-html"></i></div></a></a>
+                        <a href="https://leonardodlima.github.io/Portfolio/" target="_blank">
+                            <div class="Skills"><i class="bi bi-filetype-html"></i></div>
+                        </a>
                     </div>
                     <div class="back"></div>
                 </div>
                 <!-- Item 4 -->
                 <div class="item" style="--position: 4">
                     <div class="front">
-                        <a href="projeto4.html"><div class="Skills"><i class="bi bi-filetype-html"></i></div></a></a>
+                        <a href="https://leonardodlima.github.io/Portfolio/" target="_blank">
+                            <div class="Skills"><i class="bi bi-filetype-html"></i></div>
+                        </a>
                     </div>
                     <div class="back"></div>
                 </div>
@@ -104,34 +112,39 @@
         <!-- Instrução de navegação -->
         <br>
         <h3 class="txt-navegacao">
-            Click nos botões para navegar ou utilize as teclas A e D.
+            Click on the buttons to navigate or use the A and D keys.
         </h3>
         <!-- Botões de navegação do carrossel -->
         <div class="bataoFoto">
-            <button class="btnAnteFt" id="fotoAnterior"><i class="bi bi-arrow-left-circle-fill"></i> Anterior</button>
-            <button class="btnProxFt" id="proximaFoto">Próximo <i class="bi bi-arrow-right-circle-fill"></i></button>
+            <button class="btnAnteFt" id="fotoAnterior"><i class="bi bi-arrow-left-circle-fill"></i> Previous</button>
+            <button class="btnProxFt" id="proximaFoto">Next <i class="bi bi-arrow-right-circle-fill"></i></button>
         </div>
     </section>
-            <div class="content-section section-5" data-section="4" id="Contact">
-                <h2>Contact.</h2>
-                    <div class="input-box">
-                        <input type="text" placeholder="You name" name="nome" required>
-                        <input type="email" placeholder="You E-mail" name="email" required>
-                    </div>
-                    <div class="input-box">
-                        <input type="tel" placeholder="Phone" maxlength="15" name="telefone" onkeyup="identificadorTelefone(event)">
-                        <input type="text" placeholder="E-mail about" name="assunto" required>
-                    </div>
-                    <textarea name="mensagem" cols="47" rows="10" placeholder="You Mensager" required></textarea>
-                    <!-- Botão para enviar o formulário -->
-                    <input type="submit" value="Send mensager" class="btn"></input>
-                </form>
-            </div>
+                <section class="content-section section-5 contato" data-section="4" id="Contact">
+                    <h2 class="">My Contact!</h2>
+                    <form id="form-Contact">
+                        <div class="input-box">
+                            <input type="text" placeholder="Your name" name="nome" required>
+                            <input type="email" placeholder="Your Email" name="email" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="tel" placeholder="Telephone" maxlength="15" name="telefone" onkeyup="identificadorTelefone(event)">
+                            <input type="text" placeholder="Subject" name="assunto" required>
+                        </div>
+                        <textarea name="mensagem" cols="30" rows="10" class="text-ride" placeholder="Your message" required></textarea>
+                        <input type="submit" value="Send message" class="btn">
+                        <h2 class="txt-navegacao">
+                            Contact form with validation and storage in localStorage.
+                        </h2>
+                    </form>
+                    <div id="loader">Sending...</div>
+                    <div id="mensagem-status"></div>
+                </section>
         </div>
     </div>
     
     <div class="scroll-indicator" id="scrollIndicator">
-        <div>Role para explorar</div>
+        <div>Scroll to explore!</div>
         <div class="scroll-arrow">↓</div>
     </div>
 

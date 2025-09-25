@@ -408,6 +408,7 @@ p {
 
 /* Área de visualização do carrossel */
 .portfolio-banner {
+  
 width: 100%;
 height: 55vh;
 text-align: center;
@@ -417,7 +418,8 @@ position: relative;
 .Skills{
   width: 200px;
   height: 125px;
-  background-color: red;
+  background-color: rgba(26, 26, 46, 0.5);
+  border: solid 1px white;
 }
 
 /* Configurações do carrossel 3D */
@@ -434,11 +436,15 @@ transition: 1s; /* Animação suave ao girar */
 
 /* Cada item (imagem) do carrossel */
 .portfolio-banner .portfolio-slider .item {
+pointer-events: none; /* Desabilita clique geral */
 position: absolute;
 inset: 0 0 0 0; /* Ocupa 100% da área */
 transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(180px); /* Distribui os itens circularmente no espaço 3D */
 transform-style: preserve-3d; /* Mantém a profundidade do item */
 border-radius: 1rem;
+}
+.portfolio-banner .portfolio-slider .front {
+  pointer-events: auto; /* Reativa clique só na frente visível */
 }
 .portfolio-banner .portfolio-slider .item:hover{
 box-shadow: var(--main-color) 0px 0px 10px 0px;
@@ -571,6 +577,71 @@ font-size: 2rem;
 color: var(--second-bg-color);
 }
 
+
+#form-Contact{
+  display: block;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.text-ride{
+  width: 100%;
+  background: rgba(26, 26, 46, 0.5);
+  color: white;
+  border-radius: 0.2rem;
+}
+.text-ride:focus{
+  box-shadow:none;
+
+}
+.input-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+
+}
+.input-box input {
+  width: 49%;
+  background: rgba(26, 26, 46, 0.5);
+  color: white;
+  border-radius: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.btn {
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: rgba(26, 26, 46, 1);
+  border-radius: 1rem;
+  font-size: 1rem;
+  color: var(--second-bg-color);
+  letter-spacing: .1rem;
+  font-weight: 200;
+  transition: .5s ease;
+}
+
+
+.btn:hover {
+  box-shadow:  0 0 0.5rem rgb(8, 0, 67);
+
+}
+
+.txt-navegacao{
+  font-size: 1rem;
+  font-weight: 300;
+  margin-top: 1rem;
+  text-shadow: 0 0 20px rgba(23, 26, 213, 0.67);
+}
+
+#loader{
+  color: green;
+  font-weight: 600;
+  margin-top: 1rem;
+  text-shadow: 0 0 10px rgb(255, 255, 255);
+  display: none;
+}
+
 /* Responsividade melhorada */
 @media (max-width: 768px) {
   h1 { font-size: 2.5rem; }
@@ -649,4 +720,27 @@ color: var(--second-bg-color);
   .portfolio-banner .portfolio-slider{
     left: calc(50% - 50px);
   }
+}
+/* nova regra*/
+/* CORREÇÃO: Controle de visibilidade das seções */
+.content-section {
+  /* ... suas regras existentes ... */
+  visibility: hidden; /* Oculta por padrão */
+  pointer-events: none; /* Desabilita interações */
+}
+
+.content-section.visible {
+  visibility: visible; /* Mostra quando ativa */
+  pointer-events: auto; /* Habilita interações */
+}
+
+/* CORREÇÃO: Portfolio banner com z-index controlado */
+.portfolio-banner {
+  /* ... suas regras existentes ... */
+  z-index: 1; /* Z-index baixo */
+}
+
+.portfolio-banner .portfolio-slider {
+  /* ... suas regras existentes ... */
+  z-index: 1; /* Mantém baixo */
 }
