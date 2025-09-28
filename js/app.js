@@ -410,3 +410,56 @@ function salvarMensagemLocal(nome, email, telefone, assunto, mensagem) {
     mensagensSalvas.push(novaMensagem);
     localStorage.setItem('mensagens', JSON.stringify(mensagensSalvas));
 }
+
+/*======================== card tempo ===================================*/
+const API_KEY = '3205254e7ef1673bd67e7e666abdbf83';
+
+
+// Função para iniciar a busca
+function obterLocalizacao() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+        mostrarErro("Geolocalização não suportada pelo navegador.");
+    }
+}
+
+// Sucesso ao obter localização
+function success(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    // Busca o tempo atual na API
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=pt_br&appid=${API_KEY}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.cod !== 200) {
+                mostrarErro(data.message);
+                return;
+            }
+
+            // Atualiza informações na tela
+            document.getElementById("locationName").textContent = data.name;
+            document.getElementById("temperature").textContent = `${Math.round(data.main.temp)}°C`;
+            document.getElementById("weatherDescription").textContent = data.weather[0].description;
+            document.getElementById("humidity").textContent = `Umidade ${data.main.humidity}%`;
+            document.getElementById("feelsLike").textContent = `${Math.round(data.main.feels_like)}°C`;
+            document.getElementById("windSpeed").textContent = `${data.wind.speed} km/h`;
+            document.getElementById("pressure").textContent = `${data.main.pressure} hPa`;
+
+            // Ícone do tempo (se quiser trocar o ☀️ por ícones reais da API)
+            const iconCode = data.weather[0].icon;
+            document.getElementById("weatherIcon").innerHTML = `<img src="https://openweathermap.org/img/wn/${iconCode}@2x.png" alt="${data.weather[0].description}">`;
+        })
+        .catch(() => mostrarErro("Erro ao buscar dados do tempo."));
+}
+
+// Erro ao pegar localização
+function error() {
+    mostrarErro("Não foi possível obter sua localização.");
+}
+
+// Mostra erro no card
+function mostrarErro(msg) {
+    document.getElementById("errorMessage").textContent = msg;
+}
