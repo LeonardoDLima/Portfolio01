@@ -343,8 +343,7 @@ const identificadorTelefone = (event) => {
   }
 
   /*======================== envio ===================================*/
-// app.js
-document.getElementById("form-Contact").addEventListener("submit", async (e) => {
+  document.getElementById("form-Contact").addEventListener("submit", async (e) => {
     e.preventDefault();
   
     const form = e.target;
@@ -360,25 +359,32 @@ document.getElementById("form-Contact").addEventListener("submit", async (e) => 
     document.getElementById("mensagem-status").textContent = "";
   
     try {
-      const response = await fetch("api/send-email", {
+      const response = await fetch("/api/send-email", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json" 
+        },
         body: JSON.stringify(data),
       });
   
       const result = await response.json();
-      if (result.success) {
-        document.getElementById("mensagem-status").textContent = "✅ Mensagem enviada com sucesso!";
+      
+      if (response.ok && result.success) {
+        document.getElementById("mensagem-status").innerHTML = "✅ Mensagem enviada com sucesso!";
+        document.getElementById("mensagem-status").style.color = "#4CAF50";
         form.reset();
       } else {
-        document.getElementById("mensagem-status").textContent = "❌ Erro ao enviar mensagem.";
+        document.getElementById("mensagem-status").innerHTML = `❌ ${result.message || 'Erro ao enviar mensagem'}`;
+        document.getElementById("mensagem-status").style.color = "#f44336";
       }
     } catch (err) {
-      document.getElementById("mensagem-status").textContent = "❌ Erro de conexão.";
+      console.error("Erro:", err);
+      document.getElementById("mensagem-status").innerHTML = "❌ Erro de conexão. Tente novamente.";
+      document.getElementById("mensagem-status").style.color = "#f44336";
     } finally {
       document.getElementById("loader").style.display = "none";
     }
-  });
+});
   
 /*======================== card tempo ===================================*/
 const API_KEY = '3205254e7ef1673bd67e7e666abdbf83';
