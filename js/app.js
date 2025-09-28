@@ -343,74 +343,43 @@ const identificadorTelefone = (event) => {
   }
 
   /*======================== envio ===================================*/
-  document.getElementById('form-Contact').addEventListener('submit', function (e) {
+// app.js
+document.getElementById("form-Contact").addEventListener("submit", async (e) => {
     e.preventDefault();
-
+  
     const form = e.target;
-    const nome = form.nome.value.trim();
-    const email = form.email.value.trim();
-    const telefone = form.telefone.value.trim();
-    const assunto = form.assunto.value.trim();
-    const mensagem = form.mensagem.value.trim();
-
-    const status = document.getElementById('mensagem-status');
-    const loader = document.getElementById('loader');
-
-    if (nome && email && assunto && mensagem) {
-        // Mostrar loader
-        loader.style.display = 'block';
-        status.style.opacity = 0;
-
-        // Simulando envio (2 segundos)
-        setTimeout(() => {
-            // Ocultar loader
-            loader.style.display = 'none';
-
-            // Exibir mensagem de sucesso com fade-in
-            status.innerText = 'Mensagem enviada com sucesso!';
-            status.style.color = 'green';
-            status.classList.add('fade');
-
-            // Salvar no localStorage
-            salvarMensagemLocal(nome, email, telefone, assunto, mensagem);
-
-            // Limpar formulário
-            form.reset();
-
-            // Ocultar mensagem após 3 segundos (fade-out)
-            setTimeout(() => {
-                status.classList.remove('fade');
-            }, 3000);
-
-        }, 2000);
-    } else {
-        status.innerText = 'Por favor, preencha todos os campos obrigatórios.';
-        status.style.color = 'red';
-        status.classList.add('fade');
-
-        setTimeout(() => {
-            status.classList.remove('fade');
-        }, 3000);
-    }
-});
-
-// Função para salvar a mensagem no localStorage
-function salvarMensagemLocal(nome, email, telefone, assunto, mensagem) {
-    const mensagensSalvas = JSON.parse(localStorage.getItem('mensagens')) || [];
-
-    const novaMensagem = {
-        nome: nome,
-        email: email,
-        telefone: telefone,
-        assunto: assunto,
-        mensagem: mensagem,
-        data: new Date().toLocaleString()
+    const data = {
+      nome: form.nome.value,
+      email: form.email.value,
+      telefone: form.telefone.value,
+      assunto: form.assunto.value,
+      mensagem: form.mensagem.value,
     };
-
-    mensagensSalvas.push(novaMensagem);
-    localStorage.setItem('mensagens', JSON.stringify(mensagensSalvas));
-}
-
+  
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("mensagem-status").textContent = "";
+  
+    try {
+      const response = await fetch("api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+  
+      const result = await response.json();
+      if (result.success) {
+        document.getElementById("mensagem-status").textContent = "✅ Mensagem enviada com sucesso!";
+        form.reset();
+      } else {
+        document.getElementById("mensagem-status").textContent = "❌ Erro ao enviar mensagem.";
+      }
+    } catch (err) {
+      document.getElementById("mensagem-status").textContent = "❌ Erro de conexão.";
+    } finally {
+      document.getElementById("loader").style.display = "none";
+    }
+  });
+  
 /*======================== card tempo ===================================*/
 const API_KEY = '3205254e7ef1673bd67e7e666abdbf83';
 
@@ -439,7 +408,6 @@ function success(position) {
             }
 
             // Atualiza informações na tela
-            document.getElementById("locationName").textContent = data.name;
             document.getElementById("temperature").textContent = `${Math.round(data.main.temp)}°C`;
             document.getElementById("weatherDescription").textContent = data.weather[0].description;
             document.getElementById("humidity").textContent = `Umidade ${data.main.humidity}%`;
@@ -450,6 +418,9 @@ function success(position) {
             // Ícone do tempo (se quiser trocar o ☀️ por ícones reais da API)
             const iconCode = data.weather[0].icon;
             document.getElementById("weatherIcon").innerHTML = `<img src="https://openweathermap.org/img/wn/${iconCode}@2x.png" alt="${data.weather[0].description}">`;
+        
+            // 🔹 Depois: Nome mais preciso da localização (bairro + cidade)
+         reverseGeocode(lat, lon);
         })
         .catch(() => mostrarErro("Erro ao buscar dados do tempo."));
 }
@@ -463,3 +434,23 @@ function error() {
 function mostrarErro(msg) {
     document.getElementById("errorMessage").textContent = msg;
 }
+// 🔹 Função para pegar bairro + cidade via OpenStreetMap (Nominatim)
+function reverseGeocode(lat, lon) {
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.address) {
+                const bairro = data.address.suburb || data.address.neighbourhood || "";
+                const cidade = data.address.city || data.address.town || data.address.village || "";
+                document.getElementById("locationName").textContent = `${cidade}`;
+            } else {
+                document.getElementById("locationName").textContent = "Localização aproximada";
+            }
+        })
+        .catch(() => {
+            document.getElementById("locationName").textContent = "Localização aproximada";
+        });
+}
+
+// 🔥 Chama automaticamente ao carregar a página
+window.addEventListener("load", obterLocalizacao);

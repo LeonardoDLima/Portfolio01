@@ -761,9 +761,8 @@ color: var(--second-bg-color);
   max-width: 400px;
   transition: all 0.3s ease;
   height: 45%;
+  display: grid;
 }
-
-
 
 .medium-box {
   text-align: center;
