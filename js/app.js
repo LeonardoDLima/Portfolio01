@@ -359,7 +359,8 @@ const identificadorTelefone = (event) => {
     document.getElementById("mensagem-status").textContent = "";
   
     try {
-      const response = await fetch("/api/send-email", {
+      const response = await 
+      fetch("https://portfolio01-cyan-six.vercel.app/api/send-email", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json" 
@@ -374,7 +375,7 @@ const identificadorTelefone = (event) => {
         document.getElementById("mensagem-status").style.color = "#4CAF50";
         form.reset();
       } else {
-        document.getElementById("mensagem-status").innerHTML = `❌ ${result.message || 'Erro ao enviar mensagem'}`;
+        document.getElementById("mensagem-status").innerHTML = `❌ ${result.message || result.error || 'Erro ao enviar mensagem'}`;
         document.getElementById("mensagem-status").style.color = "#f44336";
       }
     } catch (err) {
