@@ -406,7 +406,7 @@ function success(position) {
     const lon = position.coords.longitude;
 
     // Busca o tempo atual na API
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=en_us&appid=${API_KEY}`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&lang=en_us&appid=${API_KEY}`)
         .then(res => res.json())
         .then(data => {
             if (data.cod !== 200) {
@@ -415,11 +415,11 @@ function success(position) {
             }
 
             // Atualiza informações na tela
-            document.getElementById("temperature").textContent = `${Math.round(data.main.temp)}°C`;
+            document.getElementById("temperature").textContent = `${Math.round(data.main.temp)}°F`;
             document.getElementById("weatherDescription").textContent = data.weather[0].description;
-            document.getElementById("humidity").textContent = `Umidade ${data.main.humidity}%`;
-            document.getElementById("feelsLike").textContent = `${Math.round(data.main.feels_like)}°C`;
-            document.getElementById("windSpeed").textContent = `${data.wind.speed} km/h`;
+            document.getElementById("humidity").textContent = `Humidity ${data.main.humidity}%`;
+            document.getElementById("feelsLike").textContent = `${Math.round(data.main.feels_like)}°F`;
+            document.getElementById("windSpeed").textContent = `${data.wind.speed} mph`;
             document.getElementById("pressure").textContent = `${data.main.pressure} hPa`;
 
             // Ícone do tempo (se quiser trocar o ☀️ por ícones reais da API)
