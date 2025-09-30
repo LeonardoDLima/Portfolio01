@@ -24,7 +24,7 @@ export default async function handler(req, res) {
       to: 'leonardodlima615@hotmail.com',
       subject: `Nova mensagem: ${assunto}`,
       html: `
-        <h2>📩 Nova mensagem recebida!</h2>
+        <h2>Nova mensagem recebida!</h2>
         <p><b>Nome:</b> ${nome}</p>
         <p><b>Email:</b> ${email}</p>
         <p><b>Telefone:</b> ${telefone}</p>

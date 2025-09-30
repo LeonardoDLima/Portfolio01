@@ -371,16 +371,16 @@ const identificadorTelefone = (event) => {
       const result = await response.json();
       
       if (response.ok && result.success) {
-        document.getElementById("mensagem-status").innerHTML = "✅ Mensagem enviada com sucesso!";
+        document.getElementById("mensagem-status").innerHTML = "✅ Message sent successfully!";
         document.getElementById("mensagem-status").style.color = "#4CAF50";
         form.reset();
       } else {
-        document.getElementById("mensagem-status").innerHTML = `❌ ${result.message || result.error || 'Erro ao enviar mensagem'}`;
+        document.getElementById("mensagem-status").innerHTML = `❌ ${result.message || result.error || 'Error sending message'}`;
         document.getElementById("mensagem-status").style.color = "#f44336";
       }
     } catch (err) {
       console.error("Erro:", err);
-      document.getElementById("mensagem-status").innerHTML = "❌ Erro de conexão. Tente novamente.";
+      document.getElementById("mensagem-status").innerHTML = "❌ Connection error. Please try again..";
       document.getElementById("mensagem-status").style.color = "#f44336";
     } finally {
       document.getElementById("loader").style.display = "none";
@@ -396,7 +396,7 @@ function obterLocalizacao() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(success, error);
     } else {
-        mostrarErro("Geolocalização não suportada pelo navegador.");
+        mostrarErro("Geolocation not supported by browser.");
     }
 }
 
@@ -406,7 +406,7 @@ function success(position) {
     const lon = position.coords.longitude;
 
     // Busca o tempo atual na API
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=pt_br&appid=${API_KEY}`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=en_us&appid=${API_KEY}`)
         .then(res => res.json())
         .then(data => {
             if (data.cod !== 200) {
@@ -429,12 +429,12 @@ function success(position) {
             // 🔹 Depois: Nome mais preciso da localização (bairro + cidade)
          reverseGeocode(lat, lon);
         })
-        .catch(() => mostrarErro("Erro ao buscar dados do tempo."));
+        .catch(() => mostrarErro("Error fetching weather data."));
 }
 
 // Erro ao pegar localização
 function error() {
-    mostrarErro("Não foi possível obter sua localização.");
+    mostrarErro("Unable to get your location.");
 }
 
 // Mostra erro no card
@@ -451,11 +451,11 @@ function reverseGeocode(lat, lon) {
                 const cidade = data.address.city || data.address.town || data.address.village || "";
                 document.getElementById("locationName").textContent = `${cidade}`;
             } else {
-                document.getElementById("locationName").textContent = "Localização aproximada";
+                document.getElementById("locationName").textContent = "Approximate location";
             }
         })
         .catch(() => {
-            document.getElementById("locationName").textContent = "Localização aproximada";
+            document.getElementById("locationName").textContent = "Approximate location";
         });
 }
 
