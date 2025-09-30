@@ -21,7 +21,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const data = await resend.emails.send({
-      from: 'My Portfólio <onboarding@resend.dev>',
+      from: 'Leonardo <onboarding@resend.dev>',
       to: 'leonardodlima615@hotmail.com',
       subject: `Nova mensagem: ${assunto}`,
       html: `
