@@ -4,18 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio de Leonardo Duarte de Lima - Desenvolvedor FullStack">
     <title>My Portfólio</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <div class="progress-bar" id="progressBar"></div>
-
     <div class="hero-text-container" id="heroContainer">
         <div class="hero-text" id="heroText">I am Leonardo!</div>
     </div>
-
-    <!-- Barra lateral de navegação -->
     <div class="sidebar-nav" id="sidebarNav">
         <div class="bigger-box">
             <div class="medium-box">
@@ -23,16 +22,12 @@
                     <span class="location-icon">📍</span>
                     <span id="locationName">Locating...</span>
                 </h2>
-                
                 <p class="temp" id="temperature">--°</p>
-                
                 <div class="smaller-box">
                     <div class="img-time" id="weatherIcon">☀️</div>
                     <p class="forecast" id="weatherDescription">Loading...</p>
                 </div>
-                
                 <p class="humidity" id="humidity">Humidity --%</p>
-                
                 <div class="weather-details">
                     <div class="detail-item">
                         <div class="detail-label">Sensation</div>
@@ -47,35 +42,32 @@
                         <div class="detail-value" id="pressure">-- hPa</div>
                     </div>
                 </div>
-                
                 <button class="btn btn-update" id="refreshBtn" onclick="obterLocalizacao()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="2 -2 16 16" id="refreshIcon">
-                        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
-                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
-                      </svg>Update
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-arrow-clockwise" viewBox="2 -2 16 16" id="refreshIcon">
+                        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
+                        <path
+                            d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466" />
+                    </svg>
+                    <abbr title="Update temperature">Update</abbr>
                 </button>
-                
                 <div id="errorMessage"></div>
             </div>
         </div>
-    
         <a href="#Start" class="nav-link">Start</a>
         <a href="#Skills" class="nav-link">Skills</a>
         <a href="#About" class="nav-link">About me</a>
         <a href="#Projects" class="nav-link">Projects</a>
         <a href="#Contact" class="nav-link">Contact</a>
     </div>
-
     <div class="particles" id="particles"></div>
-
     <div class="scroll-container">
         <div class="viewport">
-            <div class="content-section section-1" data-section="0" id="Start">
+            <section class="content-section section-1" data-section="0" id="Start">
                 <h1>Welcome to my Portfólio.</h1>
                 <p>I am a FullStack Software Engineer.</p>
-            </div>
-
-            <div class="content-section section-2 active" data-section="1" id="Skills">
+            </section>
+            <section class="content-section section-2 active" data-section="1" id="Skills">
                 <h2>Skills</h2>
                 <h3>Programming Languages</h3>
                 <div class="tech-grid">
@@ -96,37 +88,26 @@
                         <p>full-stack framework</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="content-section section-3" data-section="2" id="About">
+            </section>
+            <section class="content-section section-3" data-section="2" id="About">
                 <h2>About Me!</h2>
                 <p>A dedicated and hard-working person, always looking to improve my skills to be a good professional,
                     quick to learn new skills and very focused, I am very sociable and spare no effort to achieve my
                     goals.</p>
-            </div>
-
-            <!-- <div class="content-section section-4" data-section="3">
-                <h2>Most recent projects!</h2>
-                <p>Renderização eficiente com 60fps constantes, garantindo suavidade mesmo em dispositivos com recursos limitados.</p>
-            </div>-->
-
-            <!-- Seção de portfólio -->
-
+                </class=>
+            </section>
             <section class=" content-section section-4" data-section="3" id="Projects">
                 <h4 class="cabecario">Latest <span>Projects</span></h4>
-                <!-- Carrossel 3D de projetos -->
                 <div class="portfolio-banner">
                     <div class="portfolio-slider" style="--quantity: 4">
-                        <!-- Item 1 -->
                         <div class="item" style="--position: 1">
                             <div class="front">
                                 <a href="https://leonardodlima.github.io/Portfolio/" target="_blank">
                                     <div class="Skills"><i class="bi bi-filetype-html"></i></div>
                                 </a>
                             </div>
-                            <div class="back"></div> <!-- Verso preto -->
+                            <div class="back"></div>
                         </div>
-                        <!-- Item 2 -->
                         <div class="item" style="--position: 2">
                             <div class="front">
                                 <a href="https://leonardodlima.github.io/Portfolio/" target="_blank">
@@ -135,7 +116,6 @@
                             </div>
                             <div class="back"></div>
                         </div>
-                        <!-- Item 3 -->
                         <div class="item" style="--position: 3">
                             <div class="front">
                                 <a href="https://leonardodlima.github.io/Portfolio/" target="_blank">
@@ -144,7 +124,6 @@
                             </div>
                             <div class="back"></div>
                         </div>
-                        <!-- Item 4 -->
                         <div class="item" style="--position: 4">
                             <div class="front">
                                 <a href="https://leonardodlima.github.io/Portfolio/" target="_blank">
@@ -155,21 +134,17 @@
                         </div>
                     </div>
                 </div>
-                <!-- Instrução de navegação -->
                 <br>
                 <h3 class="txt-navegacao">
                     Click on the buttons to navigate or use the A and D keys.
                 </h3>
-                <!-- Botões de navegação do carrossel -->
                 <div class="bataoFoto">
-                    <button class="btnAnteFt" id="fotoAnterior"><i class="bi bi-arrow-left-circle-fill"></i>
-                        Previous</button>
-                    <button class="btnProxFt" id="proximaFoto">Next <i
-                            class="bi bi-arrow-right-circle-fill"></i></button>
+                    <button class="btnAnteFt" id="fotoAnterior"><i class="bi bi-arrow-left-circle-fill"></i>Previous </button>
+                    <button class="btnProxFt" id="proximaFoto">Next <i class="bi bi-arrow-right-circle-fill"></i></button>
                 </div>
             </section>
             <section class="content-section section-5 contato" data-section="4" id="Contact">
-                <h2 class="">My Contact!</h2>
+                <h2 class="text-contact">My Contact!</h2>
                 <form id="form-Contact">
                     <div class="input-box">
                         <input type="text" placeholder="Your name" name="nome" required>
@@ -182,19 +157,17 @@
                     </div>
                     <textarea name="mensagem" cols="30" rows="10" class="text-ride" placeholder="Your message"
                         required></textarea>
-                    <input type="submit" value="Send message" class="btn">
+                    <input type="submit" value="Send message" class="btn btn-submit">
                 </form>
                 <div id="loader">Sending...</div>
                 <div id="mensagem-status"></div>
             </section>
         </div>
     </div>
-
     <div class="scroll-indicator" id="scrollIndicator">
         <div>Scroll to explore!</div>
         <div class="scroll-arrow">↓</div>
     </div>
-
     <script src="js/app.js"></script>
 </body>
 

@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  --main-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 html { scroll-behavior: smooth; }
@@ -174,6 +175,12 @@ p {
   animation: bounce 2s infinite;
   margin-top: 10px;
   font-size: 1.2rem;
+}
+.text-contact{
+  cursor:default;
+}
+.btn-submit{
+  cursor: pointer;
 }
 
 /* CORREÇÃO: @keyframes bounce corrigido */
@@ -499,6 +506,9 @@ letter-spacing: .1rem;
 font-weight: 600;
 transition: .5s ease;
 }
+.btnAnteFt > i{
+  margin-right: 0.5rem;
+}
 
 /* Hover dos botões de navegação */
 .btnProxFt:hover,
@@ -591,6 +601,12 @@ color: var(--second-bg-color);
 .text-ride:focus{
   box-shadow:none;
 
+}
+input:focus {
+  outline: none; 
+}
+textarea:focus {
+  outline: none; 
 }
 .input-box {
   display: flex;
@@ -866,27 +882,14 @@ color: var(--second-bg-color);
 }
 
 .btn-update{
+  cursor:pointer;
   margin-top: 0.3rem;
   padding: 0.5rem 1.3rem;
 }
-/*
-.refresh-btn {
-  background: linear-gradient(135deg, #3498db, #2980b9);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  margin-top: 9px;
-  transition: all 0.3s ease;
+abbr[title] {
+  text-decoration: none;
 }
 
-.refresh-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
-}*/
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
