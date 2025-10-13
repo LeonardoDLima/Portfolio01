@@ -225,38 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.documentElement.style.scrollBehavior = 'auto';
-/*============================= botào navegação portfolio =========================*/
-
-const btnProx = document.querySelector(".btnProxFt");
-const btnAnte = document.querySelector(".btnAnteFt");
-const slider = document.querySelector(".portfolio-slider");
-
-let rotateDeg = 0;
-btnAnte.addEventListener('click', () => {
-rotateDeg = rotateDeg + 90;
-slider.style.transform = 'perspective(1000px) rotateX(-9deg) rotateY('+rotateDeg+'deg)';
-});
-btnProx.addEventListener('click', () => {
-rotateDeg = rotateDeg - 90;
-slider.style.transform = 'perspective(1000px) rotateX(-9deg) rotateY('+rotateDeg+'deg)';
-});
-
-/*========================== acionamento por teclado ==============================*/
-document.addEventListener("keypress", function (e) {
-
-if(e.key === "d") {
-
-const btn2 = document.querySelector("#proximaFoto");
-
-btn2.click();
-}
-if(e.key === "a") {
-
-const btn1 = document.querySelector("#fotoAnterior");
-
-btn1.click();
-}
-});
 
 /*========================== animacao da pagina botao navegacao ==============================*/
 document.addEventListener('DOMContentLoaded', () => {
@@ -461,3 +429,34 @@ function reverseGeocode(lat, lon) {
 
 // 🔥 Chama automaticamente ao carregar a página
 window.addEventListener("load", obterLocalizacao);
+  /*======================== navegação menu projetos ===================================*/
+const prevButton = document.getElementById('prev');
+const nextButton = document.getElementById('next');
+const items = document.querySelectorAll('.item');
+const list = document.querySelectorAll('.list');
+
+let active = 0;
+const total = items.length;
+let timer;
+
+function update(direction){
+    document.querySelector('.item.active').classList.remove('active');
+    if(direction > 0){
+        active = (active + 1) % total;
+    }else if(direction < 0){
+        active = (active - 1 + total) % total;
+    }
+
+    items[active].classList.add('active');
+}
+clearInterval(timer);
+timer = setInterval(() => {
+    update(1)
+}, 5000);
+
+prevButton.addEventListener('click', () => {
+    update(-1);
+    })
+nextButton.addEventListener('click', () => {
+    update(1)
+    })

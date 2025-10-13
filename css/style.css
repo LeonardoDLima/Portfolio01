@@ -93,12 +93,123 @@ body {
 
 .section-4 {
   background: none;
+  overflow: hidden;
 }
 
 .section-5 {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
+.list{
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+.item{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
 
+  /* Animação */
+  transform: translateX(100%);
+  transition: transform 0.7s ease-in-out, opacity 0.7s ease-in-out; 
+
+}
+.active{
+  opacity: 1;
+  transform: translateX(0);
+}
+.poject-img{
+  width: 45%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  /* Animação */
+  transform: translateX(400px);
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  transition-delay: delay 0.5s;
+}
+.active .poject-img{
+  transform: translateX(0);
+  opacity: 1;
+}
+.poject-img img{
+  max-width: 80%;
+  max-height: 60%;
+  filter: drop-shadow(0 0 30px rgba(102, 126, 234, 0.3));
+}
+.content-project{
+  width: 55%;
+  padding-right: 80px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+.project-tag{
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: white ;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.project-name{
+  font-size: 1rem;
+  font-family: 'Orbitron', sans-serif;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.description{
+font-size: 0.8rem;
+color: white;
+line-height: 1.6;
+margin-bottom: 30px;
+max-width: 600px;
+}
+.btn-project-more{
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 30px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border:none;
+  text-decoration: none;
+}
+.btn-project-more:hover{
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
+.arrows{
+  position: absolute;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+}
+.arrow-btn{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: none;
+  border: 1px solid white;
+  color: white;
+}
+.arrow-btn:hover{
+  background: rgba(128, 128, 128, 0.317);
+}
 h1 {
   font-size: 4rem;
   font-weight: 800;
@@ -412,151 +523,7 @@ p {
   }
 }
 
-/* Área de visualização do carrossel */
-.portfolio-banner {
-  
-width: 100%;
-height: 55vh;
-text-align: center;
-overflow: hidden;
-position: relative;
-}
-.Skills{
-  width: 200px;
-  height: 125px;
-  background-color: rgba(26, 26, 46, 0.5);
-  border: solid 1px white;
-}
 
-/* Configurações do carrossel 3D */
-.portfolio-banner .portfolio-slider {
-position: absolute;
-top: 20%;
-width: 200px;
-height: 125px;
-left: calc(50% - 100px);
-transform-style: preserve-3d; /* Ativa o efeito 3D */
-transform: perspective(1000px) rotateX(-9deg); /* Perspectiva e inclinação 3D */
-transition: 1s; /* Animação suave ao girar */
-}
-
-/* Cada item (imagem) do carrossel */
-.portfolio-banner .portfolio-slider .item {
-pointer-events: none; /* Desabilita clique geral */
-position: absolute;
-inset: 0 0 0 0; /* Ocupa 100% da área */
-transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(180px); /* Distribui os itens circularmente no espaço 3D */
-transform-style: preserve-3d; /* Mantém a profundidade do item */
-border-radius: 1rem;
-}
-.portfolio-banner .portfolio-slider .front {
-  pointer-events: auto; /* Reativa clique só na frente visível */
-}
-.portfolio-banner .portfolio-slider .item:hover{
-box-shadow: var(--main-color) 0px 0px 10px 0px;
-}
-
-/* Faces do carrossel (frente e verso) */
-.portfolio-banner .portfolio-slider .front,
-.portfolio-banner .portfolio-slider .back {
-position: absolute;
-width: 100%;
-height: 100%;
-backface-visibility: hidden; /* Esconde o verso ao olhar de frente */
-border-radius: 1rem;
-overflow: hidden;
-box-shadow: none;
-}
-
-/* Imagens do carrossel */
-.portfolio-banner .portfolio-slider .front img {
-width: 100%;
-height: 100%;
-object-fit: cover; /* Imagem cobre toda a área */
-transition: transform 0.5s ease;
-cursor: pointer;
-}
-
-/* Zoom na imagem ao passar o mouse */
-.portfolio-banner .portfolio-slider .front:hover img {
-transform: scale(1.1);
-}
-
-/* Verso da imagem rotacionado */
-.portfolio-banner .portfolio-slider .back {
-transform: rotateY(180deg);
-background-color: var(--bg-color);
-}
-
-/* Centraliza botões de navegação do carrossel */
-.bataoFoto {
-text-align: center;
-}
-
-/* Estilo dos botões de navegação e voltar */
-.btnAnteFt, .btnProxFt, .btnVolt {
-display: inline-block;
-padding: 1rem 2.8rem;
-background: var(--main-color);
-border-radius: 4rem;
-box-shadow: none;
-font-size: 1.6rem;
-color: var(--second-bg-color);
-letter-spacing: .1rem;
-font-weight: 600;
-transition: .5s ease;
-}
-.btnAnteFt > i{
-  margin-right: 0.5rem;
-}
-
-/* Hover dos botões de navegação */
-.btnProxFt:hover,
-.btnAnteFt:hover,
-.btnVolt:hover {
-box-shadow:  0 0 1rem var(--main-color);
-}
-
-/* Estilo das imagens dentro do carrossel */
-.portfolio-slider img {
-box-shadow:  0 0 1rem var(--main-color);
-width: 100%;
-height: 100%;
-object-fit: cover;
-}
-
-/* Efeito hover nas imagens do carrossel */
-.portfolio-slider:hover img {
-transform: scale(1.1);
-cursor: pointer;
-}
-/* Animação personalizada: altera a cor do botão */
-.btnAnteFt.animacao {
-color: green; /* Cor verde quando a classe "animacao" é aplicada */
-}
-
-/* Camada sobreposta nas imagens do carrossel */
-.portfolio-slider .portfolio-layer {
-position: absolute; /* Sobrepõe a imagem */
-bottom: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: linear-gradient(rgba(0, 0, 0, .1), var(--main-color)); /* Degradê transparente para verde */
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column; /* Alinha os elementos verticalmente */
-text-align: center;
-padding: 0 4rem;
-transform: translateY(100%); /* Começa escondida */
-transition: .5s ease;
-}
-
-/* Mostra a camada sobreposta ao passar o mouse */
-.portfolio-slider:hover .portfolio-layer {
-transform: translateY(0); /* Move para cima e aparece */
-}
 
 /* Título dentro da camada */
 .portfolio-layer h4 {
@@ -642,13 +609,6 @@ textarea:focus {
 
 }
 
-.txt-navegacao{
-  font-size: 1rem;
-  font-weight: 300;
-  margin-top: 1rem;
-  text-shadow: 0 0 20px rgba(23, 26, 213, 0.67);
-}
-
 #loader{
   color: green;
   font-weight: 600;
@@ -694,11 +654,7 @@ textarea:focus {
       font-size: 0.9rem;
       width: 110px;
   }
-  .portfolio-banner .portfolio-slider {
-    width: 100px;
-    height: 90px;
-    left: calc(50% - 50px);
-    }
+
     
 }
 
@@ -724,10 +680,7 @@ textarea:focus {
       font-size: 0.8rem;
       width: 90px;
   }
-  .portfolio-banner .portfolio-slider {
-    width: 100px;
-    height: 90px;
-    }
+  
   #sidebarNav{
     display: none;
   }
@@ -738,9 +691,7 @@ textarea:focus {
     margin-left: 0px;
     width: 100%;
   }
-  .portfolio-banner .portfolio-slider{
-    left: calc(50% - 50px);
-  }
+
 }
 /* nova regra*/
 /* CORREÇÃO: Controle de visibilidade das seções */
@@ -755,16 +706,6 @@ textarea:focus {
   pointer-events: auto; /* Habilita interações */
 }
 
-/* CORREÇÃO: Portfolio banner com z-index controlado */
-.portfolio-banner {
-  /* ... suas regras existentes ... */
-  z-index: 1; /* Z-index baixo */
-}
-
-.portfolio-banner .portfolio-slider {
-  /* ... suas regras existentes ... */
-  z-index: 1; /* Mantém baixo */
-}
 
 /* weather forecast card */
 .bigger-box {
