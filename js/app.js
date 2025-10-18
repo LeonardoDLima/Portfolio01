@@ -21,11 +21,11 @@ class ScrollEffect3D {
       window.addEventListener('scroll', this.handleScroll.bind(this));
       window.addEventListener('resize', this.handleResize.bind(this));
       
-      // Remove os eventos de clique da navegação, pois agora são links externos
+      // Remove os eventos de clique da navegação
       this.updateSections();
   }
   
-  // Remove a função scrollToSection pois não é mais necessária
+  // Remove a função scrollToSection
   
   updateNavigation() {
       this.navLinks.forEach((link, index) => {
@@ -130,7 +130,7 @@ class ScrollEffect3D {
   
   hideAllSections() {
     this.sections.forEach(section => {
-        section.classList.remove('visible'); // Remove visibilidade
+        section.classList.remove('visible');
         section.style.opacity = 0;
         section.style.transform = `
             translate(-50%, -50%) 
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Adiciona ativo no clicado
                 this.classList.add('active');
                 
-                // Calcula posição CORRETA para seu sistema 3D
+                // Calcula posição correta para sistema 3D
                 const sectionIndex = Array.from(document.querySelectorAll('.content-section')).indexOf(targetElement);
                 let scrollPercent;
                 
@@ -304,7 +304,7 @@ const identificadorTelefone = (event) => {
   const mascaraTelefone = (value) => {
     if (!value) return ""
     value = value
-    .replace(/\D/g,'')        // (\D) localiza tudo que não é numero e (g,'') para ser global e substituir por vazil
+    .replace(/\D/g,'')
     .replace(/(\d{2})(\d)/,"($1) $2") 
     .replace(/(\d)(\d{4})$/,"$1-$2")
     return value
@@ -390,11 +390,11 @@ function success(position) {
             document.getElementById("windSpeed").textContent = `${data.wind.speed} mph`;
             document.getElementById("pressure").textContent = `${data.main.pressure} hPa`;
 
-            // Ícone do tempo (se quiser trocar o ☀️ por ícones reais da API)
+            // Ícone do tempo
             const iconCode = data.weather[0].icon;
             document.getElementById("weatherIcon").innerHTML = `<img src="https://openweathermap.org/img/wn/${iconCode}@2x.png" alt="${data.weather[0].description}">`;
         
-            // 🔹 Depois: Nome mais preciso da localização (bairro + cidade)
+            // Depois: Nome mais preciso da localização (bairro + cidade)
          reverseGeocode(lat, lon);
         })
         .catch(() => mostrarErro("Error fetching weather data."));
@@ -409,7 +409,7 @@ function error() {
 function mostrarErro(msg) {
     document.getElementById("errorMessage").textContent = msg;
 }
-// 🔹 Função para pegar bairro + cidade via OpenStreetMap (Nominatim)
+// Função para pegar bairro + cidade via OpenStreetMap (Nominatim)
 function reverseGeocode(lat, lon) {
     fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`)
         .then(res => res.json())
@@ -427,9 +427,10 @@ function reverseGeocode(lat, lon) {
         });
 }
 
-// 🔥 Chama automaticamente ao carregar a página
+// Chama automaticamente ao carregar a página
 window.addEventListener("load", obterLocalizacao);
-  /*======================== navegação menu projetos ===================================*/
+
+/*======================== navegação menu projetos ===================================*/
 const prevButton = document.getElementById('prev');
 const nextButton = document.getElementById('next');
 const items = document.querySelectorAll('.item');
